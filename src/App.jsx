@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const SwipeCards = () => {
+  const [apiResult, setApiResult] = useState(false);
   const [cards, setCards] = useState([
     {
       id: 1,
@@ -11,11 +12,21 @@ const SwipeCards = () => {
     },
     {
       id: 2,
-      color: "red",
+      color: "white",
       title: "Card 2",
-      description: "This is the second card. Data will be filled from API."
+      description: "This is the second card. Border color depends on API result."
     },
   ]);
+
+  // Simulated API call
+  useEffect(() => {
+    const fetchData = async () => {
+      // Replace this with your actual API call
+      const result = await new Promise(resolve => setTimeout(() => resolve(Math.random() < 0.5), 1000));
+      setApiResult(result);
+    };
+    fetchData();
+  }, []);
 
   const handleClick = () => {
     setCards((prevCards) => [prevCards[1], prevCards[0]]);
@@ -36,6 +47,7 @@ const SwipeCards = () => {
               {...card}
               index={index}
               onClick={handleClick}
+              borderColor={card.id === 2 ? (apiResult ? 'red' : 'green') : undefined}
             />
           ))}
         </AnimatePresence>
@@ -44,7 +56,7 @@ const SwipeCards = () => {
   );
 };
 
-const Card = ({ id, color, title, description, index, onClick }) => {
+const Card = ({ id, color, borderColor, title, description, index, onClick }) => {
   const variants = {
     front: { 
       rotateY: 0,
@@ -68,11 +80,9 @@ const Card = ({ id, color, title, description, index, onClick }) => {
 
   return (
     <motion.div
-      className="absolute top-0 left-0 w-full h-full rounded-lg cursor-pointer overflow-hidden flex flex-col justify-between p-6"
+      className="absolute top-0 left-0 w-full h-full rounded-lg cursor-pointer overflow-hidden"
       style={{ 
-        backgroundColor: color,
         transformOrigin: index === 0 ? "center" : "bottom left",
-        color: color === "white" ? "black" : "white"
       }}
       variants={variants}
       initial="back"
@@ -81,10 +91,19 @@ const Card = ({ id, color, title, description, index, onClick }) => {
       transition={{ duration: 0.5 }}
       onClick={onClick}
     >
-      <h2 className="text-2xl font-bold">{title}</h2>
-      <p className="text-sm">{description}</p>
-      <div className="text-right">
-        <span className="text-xs">ID: {id}</span>
+      <div 
+        className={`w-full h-full rounded-lg ${borderColor ? 'p-2' : ''}`} 
+        style={{ backgroundColor: borderColor || color }}
+      >
+        <div className="w-full h-full rounded-lg bg-white overflow-hidden">
+          <div className="w-full h-full flex flex-col justify-between p-4">
+            <h2 className="text-2xl font-bold text-black">{title}</h2>
+            <p className="text-sm text-black">{description}</p>
+            <div className="text-right">
+              <span className="text-xs text-black">ID: {id}</span>
+            </div>
+          </div>
+        </div>
       </div>
     </motion.div>
   );
