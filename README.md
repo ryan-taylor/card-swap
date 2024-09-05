@@ -21,17 +21,20 @@ A minimalist React application showcasing a dynamic card stack with smooth anima
 
 1. Clone the repository
 2. Install dependencies:
+
    ```bash
    npm install
    ```
+
 3. Run the development server:
+
    ```bash
    npm run dev
    ```
 
 ## Project Structure
 
-- `src/App.jsx`: Main component containing the card stack logic
+- `src/App.jsx`: Main component containing the SwipeCards and Card components
 - `src/main.jsx`: Entry point of the application
 - `src/index.css`: Global styles and Tailwind CSS imports
 - `public/`: Static assets
@@ -46,6 +49,10 @@ A minimalist React application showcasing a dynamic card stack with smooth anima
 ## Customization
 
 To modify the card content or add more cards, edit the `cards` state in `src/App.jsx`:
+
+## Card Component
+
+The `Card` component is responsible for rendering individual cards with animations:
 
 ## Contributing
 
