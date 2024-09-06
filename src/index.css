@@ -20,13 +20,14 @@ html, body, #root {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
   min-height: 100vh;
   background-color: #f0f0f0;
   color: #333333;
 }
+
+/* Remove or comment out these lines if they exist */
+/* display: flex; */
+/* place-items: center; */
 
 a {
   font-weight: 500;
