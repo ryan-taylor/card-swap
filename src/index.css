@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Your custom styles */
+/* Custom styles with improved accessibility */
 html, body, #root {
   height: 100%;
   margin: 0;
@@ -11,18 +11,11 @@ html, body, #root {
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  /* ... rest of your custom styles ... */
-}
-
-/* ... rest of your custom styles ... */
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -31,6 +24,18 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #f0f0f0;
+  color: #333333;
+}
+
+a {
+  font-weight: 500;
+  color: #0000EE;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #551A8B;
 }
 
 h1 {
@@ -45,27 +50,124 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #0000EE;
+  color: #ffffff;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: background-color 0.25s;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+button:hover {
+  background-color: #000080;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px solid #000080;
+  outline-offset: 2px;
+}
+
+/* Card-specific styles */
+.card {
+  background-color: #ffffff;
+  color: #333333;
+}
+
+.card h2 {
+  color: #000000;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.card p {
+  color: #333333;
+}
+
+.card .card-id {
+  color: #666666;
+}
+
+/* Accessibility helper classes */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Improved focus visibility */
+*:focus {
+  outline: 2px solid rgba(74, 144, 226, 0.8);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.3);
+}
+
+.focus-visible:focus {
+  outline: 3px solid rgba(74, 144, 226, 1);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(74, 144, 226, 0.4);
+}
+
+/* Dark mode focus styles */
+@media (prefers-color-scheme: dark) {
+  *:focus {
+    outline-color: rgba(135, 206, 250, 0.8);
+    box-shadow: 0 0 0 4px rgba(135, 206, 250, 0.3);
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+
+  .focus-visible:focus {
+    outline-color: rgba(135, 206, 250, 1);
+    box-shadow: 0 0 0 6px rgba(135, 206, 250, 0.4);
   }
 }
+
+/* High contrast mode styles */
+@media (forced-colors: active) {
+  button {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+  }
+
+  .card {
+    background-color: #333333;
+    color: #ffffff;
+  }
+
+  .card h2 {
+    color: #ffffff;
+  }
+
+  .card p {
+    color: #e0e0e0;
+  }
+
+  .card .card-id {
+    color: #d0d0d0; /* Changed from #b0b0b0 to improve contrast */
+  }
+
+  button {
+    background-color: #4a4a4a;
+    color: #ffffff;
+  }
+
+  button:hover {
+    background-color: #666666;
+  }
+
+  button:focus,
+  button:focus-visible {
+    outline-color: #ffffff;
+  }
+}
+
